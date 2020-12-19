@@ -190,6 +190,9 @@ public class HotItemApp {
             //休息
             Thread.sleep(2000);
 
+            //清空状态
+            listState.clear();
+
             //输出数据
             out.collect(sb.toString());
 
