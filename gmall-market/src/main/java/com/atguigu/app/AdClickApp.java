@@ -9,7 +9,6 @@ import org.apache.flink.api.common.state.ValueStateDescriptor;
 import org.apache.flink.api.java.tuple.Tuple;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.TimeCharacteristic;
-import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.datastream.WindowedStream;
@@ -139,7 +138,8 @@ public class AdClickApp {
                 countState.update(1L);
 
                 //注册定时器,时间为第二天零点
-                long ts = (value.getTimestamp() / (1000L * 60 * 60) + 16) * (60 * 60 * 1000L);
+                long ts = (value.getTimestamp() / (60 * 60 * 24) + 1) * (24 * 60 * 60 * 1000L) - 8 * 60 * 60 * 1000L;
+                System.out.println(new Timestamp(ts));
                 ctx.timerService().registerEventTimeTimer(ts);
             } else {
                 //更新状态
