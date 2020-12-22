@@ -45,7 +45,6 @@ public class ChannelApp {
 
     }
 
-
     public static class ChannelAggFunc implements AggregateFunction<MarketUserBehavior, Long, Long> {
 
         @Override
